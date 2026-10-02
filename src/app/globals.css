@@ -1,0 +1,77 @@
+@import "tailwindcss";
+@import "@fontsource-variable/instrument-sans";
+
+/*
+  Central da Turma — tokens
+  Ideia: material escolar. Papel frio, caneta azul, marca-texto amarelo
+  para o que vence logo e caneta vermelha para o que atrasou.
+*/
+@theme {
+  --font-sans: "Instrument Sans Variable", ui-sans-serif, system-ui, sans-serif;
+
+  --color-papel: #f6f7f9;
+  --color-folha: #ffffff;
+  --color-linha: #dde2ea;
+  --color-tinta: #17233b;
+  --color-tinta-suave: #5b6578;
+  --color-caneta: #2b59c3;
+  --color-caneta-escura: #1f4499;
+  --color-marca: #ffe14d;
+  --color-correcao: #c8372d;
+  --color-visto: #2f8f5b;
+}
+
+html {
+  color-scheme: light;
+}
+
+body {
+  background: var(--color-papel);
+  color: var(--color-tinta);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-caneta);
+  outline-offset: 2px;
+}
+
+/* Traço de marca-texto atrás do texto (prazos que vencem logo). */
+.marca-texto {
+  background-image: linear-gradient(
+    100deg,
+    transparent 2%,
+    color-mix(in srgb, var(--color-marca) 92%, transparent) 6%,
+    var(--color-marca) 50%,
+    color-mix(in srgb, var(--color-marca) 85%, transparent) 94%,
+    transparent 98%
+  );
+  background-size: 100% 62%;
+  background-position: 0 72%;
+  background-repeat: no-repeat;
+}
+
+/* Sublinhado de caneta vermelha (atrasadas). */
+.risco-vermelho {
+  text-decoration: underline;
+  text-decoration-color: var(--color-correcao);
+  text-decoration-thickness: 2px;
+  text-underline-offset: 4px;
+}
+
+dialog::backdrop {
+  background: rgb(23 35 59 / 0.45);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  dialog[open] {
+    animation: abrir 160ms ease-out;
+  }
+  @keyframes abrir {
+    from {
+      opacity: 0;
+      transform: translateY(8px);
+    }
+  }
+}
